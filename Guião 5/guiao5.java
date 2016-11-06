@@ -10,7 +10,7 @@ public class guiao5 {
 	static Scanner read = new Scanner(System.in);
 	public static void main (String args[]) {
 		Scanner read = new Scanner(System.in);
-		// Testar função sqr:
+		//~ // Testar função sqr:
 		System.out.printf("sqr(%f) = %f\n", 10.1, sqr(10.1));
 		System.out.printf("sqr(%f) = %f\n", -2.0, sqr(-2.0));
 	
@@ -24,7 +24,12 @@ public class guiao5 {
 		System.out.printf("poly3(%.01f,%.01f,%.01f,%.01f,%.01f) = %.02f\n", 1.0,2.0,1.0,3.0,1.0,poly3(1.0,2.0,1.0,1.0,1.0));
 		System.out.printf("fact(%d) = %d\n", 5, fact(5));
 		System.out.printf("Número introduzido: %d\n",getIntPos());
-		System.out.printf("Número pertencente ao intervalo: %f",getIntRange());
+		System.out.printf("Número %.02f pertencente ao intervalo!\n",getIntRange());
+		System.out.print("Mensagem a repetir: ");
+		String msg = read.next();
+		System.out.print("Quantas vezes?: ");
+		int n = read.nextInt();
+		printNtimes(msg,n);
 		//int ano = getIntPos("Ano? ");
 		//System.out.printf("ano = %d\n", ano);
 	
@@ -77,15 +82,28 @@ public class guiao5 {
 		return inteiro;
 	}
 	public static double getIntRange(){
-		double a,b,value;
-		System.out.print("Limite inferior: ");
+		double a,b,value=0;
+		System.out.print("Limite a: ");
 		a=read.nextInt();
-		System.out.print("Limite superior: ");
+		System.out.print("Limite b: ");
 		b=read.nextInt();
-		do{
-			System.out.print("VALOR: ");
-			value = read.nextInt();
-			if(value<b&&value>a){return value;} else break;
-		}while(value>b&&value<a);
+		if(a<b){
+			do{
+				System.out.print("VALOR: ");
+				value = read.nextInt();
+			}while(value>b&&value<a);
+		}else if(a>b){
+			do{
+				System.out.print("VALOR: ");
+				value = read.nextInt();
+			}while(value>a&&value<b);
+		}
+		return value;
+	}	
+	public static void printNtimes(String msg, int n){
+		int i;
+		for(i=0;i<n;i++){
+			System.out.print(msg);
+		}
 	}
 }
