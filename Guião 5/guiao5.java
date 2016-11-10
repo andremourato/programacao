@@ -24,7 +24,7 @@ public class guiao5 {
 		System.out.printf("poly3(%.01f,%.01f,%.01f,%.01f,%.01f) = %.02f\n", 1.0,2.0,1.0,3.0,1.0,poly3(1.0,2.0,1.0,1.0,1.0));
 		System.out.printf("fact(%d) = %d\n", 5, fact(5));
 		System.out.printf("Número introduzido: %d\n",getIntPos());
-		System.out.printf("Número %.02f pertencente ao intervalo!\n",getIntRange());
+		System.out.printf("Número %d pertencente ao intervalo!\n",getIntRange());
 		System.out.print("Mensagem a repetir: ");
 		String msg = read.next();
 		System.out.print("Quantas vezes?: ");
@@ -81,8 +81,8 @@ public class guiao5 {
 		}
 		return inteiro;
 	}
-	public static double getIntRange(){
-		double a,b,value=0;
+	public static int getIntRange(){
+		int a,b,value=0;
 		System.out.print("Limite a: ");
 		a=read.nextInt();
 		System.out.print("Limite b: ");
@@ -91,13 +91,13 @@ public class guiao5 {
 			do{
 				System.out.print("VALOR: ");
 				value = read.nextInt();
-			}while(value>b&&value<a);
+			}while(value>b||value<a);
 		}else if(a>b){
 			do{
 				System.out.print("VALOR: ");
 				value = read.nextInt();
-			}while(value>a&&value<b);
-		}
+			}while(value>a||value<b);
+		}else System.out.print("Limites inválidos!!");
 		return value;
 	}	
 	public static void printNtimes(String msg, int n){

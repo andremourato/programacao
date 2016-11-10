@@ -1,5 +1,5 @@
 import java.util.*;
-public class guiao53 {
+public class guiao52 {
 	static Scanner read = new Scanner(System.in);
 	public static void main (String args[]) {
 		int n,fat;
