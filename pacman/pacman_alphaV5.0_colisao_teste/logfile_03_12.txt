@@ -1,0 +1,38 @@
+#PACMAN
+
+#André Ribeiro Martins Marques Mourato
+
+##################
+#Logfile 03/12/16#
+##################
+
+#Funcionalidades:
+
+- Habilidade de controlar o pacman com as teclas (UP, DOWN, RIGHT, LEFT);
+- Animação de abrir e fechar a boca;
+- Pacman tem a boca com a mesma direção que o movimento;
+- Pacman reconhece os limites e para quando toca nas extremidades do mapa;
+- EASTER EGG (acidental): O pacman está virado no sentido oposto do movimento se for premida qualquer tecla exceto: UP, DOWN, RIGHT, LEFT;
+- Música e sons do jogo;
+- Habilidade de tirar o som ao jogo;
+- Menu inicial;
+- Fantasmas;
+- Colisões com fantasmas;
+- Reconhece GAME OVER;
+
+#Com problemas:
+
+- O pacman reconhece as paredes, mas existem alguns problemas de alinhamento visto que é utilizado o método de deteção de colisão por cor;
+- Não consigo colocar em loop o som do pacman a andar;
+
+#A Implementar:
+
+- Comer as bolas, somando pontos para a pontuação final;
+- Fantasmas que seguirão trajetórias fixas e causaram "Game Over" caso colidam com o pacman;
+- Tela de vitória e de "Game Over";
+
+#EXTRAS:
+
+- Possibilidade de num certo ponto do mapa o pacman aparecer do outro lado do ecrã. Uma espécie de teletransporte;
+- Efeitos especiais quando as bolas são comidas e quando se perde o jogo;
+- Habilidade de inverter a trajetória dos fantasmas ao passar em quadrados especiais;
