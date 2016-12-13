@@ -3,7 +3,7 @@
 */
 import java.io.*;
 import java.util.*;
-public class guiao91 {
+public class guiao81 {
 	
 	public static void main (String args[]) throws IOException {
 		Scanner read = new Scanner(System.in); //Scanner de texto

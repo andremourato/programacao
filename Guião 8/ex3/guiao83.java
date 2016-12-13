@@ -7,12 +7,12 @@
  
 import java.io.*;
 import java.util.*;
-public class guiao93 {
+public class guiao83 {
 	static int count=0;
 	static double[] numArray = new double[50];
 	static Scanner read = new Scanner(System.in);
 	public static void main (String args[]) throws IOException {
-	
+		
 		int option;
 		int[] arrayInt = new int[50];
 		//MENU
@@ -62,7 +62,7 @@ public class guiao93 {
 				case 10:
 					break;
 				default:
-					System.out.printf("OPÇÃO INVÁLIDA!\n");
+					System.out.printf("OPÇÃO INVALIDA!\n");
 					break;
 			}
 		}while(option!=10);//TERMINA QUANDO É INTRODUZIDO 10
