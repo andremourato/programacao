@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.io.*;
 
-public class guiao84 {
+public class guiao85 {
 	
 	public static void main (String[] args) throws IOException {
 		String file = "program.txt";
