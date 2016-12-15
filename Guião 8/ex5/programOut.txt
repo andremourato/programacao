@@ -1,4 +1,3 @@
-// ordena array de inteiros
     public static void bubbleSort(int a[]) {
         int  t = 0;
         do {
@@ -10,4 +9,6 @@
                 }
             }
         } while(t != 0);
+
+/* Andre Ribeiro Martins Marques Mourato */
     }
