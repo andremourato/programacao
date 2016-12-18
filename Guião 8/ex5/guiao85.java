@@ -4,24 +4,20 @@ import java.io.*;
 public class guiao85 {
 	
 	public static void main (String[] args) throws IOException {
-		File programIn = new File("programIn.txt");
-		File programOut = new File("programOut.txt");
+		String fileIn = "programIn.txt";
+		String fileOut = "programOut.txt";
+		File programIn = new File(fileIn);
+		File programOut = new File(fileOut);
 		if(!programIn.exists()){ 
-			System.out.print("ERROR: The file 'programIn.txt' does not exist.");
+			System.out.print("ERROR: The file "+fileIn+" does not exist.");
 			System.exit(2);
 		}
-		Scanner scf = new Scanner(programIn); //reads the file 'programIn.txt'
-		PrintWriter pwf = new PrintWriter(programOut); //writes in the file 'programOut.txt'
+		Scanner scf = new Scanner(programIn); //reads the file
+		PrintWriter pwf = new PrintWriter(programOut);
 		while(scf.hasNextLine()){
 			String line = scf.nextLine();//reads the next line
 			if(!line.startsWith("//")) pwf.println(line);
-			if(line.startsWith("/*")){
-				/*do{
-					pwf.println();
-				}while(scf.next()!="");*/
-			}
 		}
-		
 		scf.close(); //closes the scanner
 		pwf.close(); //closes the printwriter
 		

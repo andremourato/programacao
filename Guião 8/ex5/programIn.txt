@@ -10,6 +10,4 @@
                 }
             }
         } while(t != 0);
-
-/* Andre Ribeiro Martins Marques Mourato */
     }
