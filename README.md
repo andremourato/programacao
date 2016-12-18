@@ -9,3 +9,5 @@ Programas dos guiões de Programação 1
   - Guião 4
   - Guião 5
   - Guião 6
+  - Guião 7
+  - Guião 8
