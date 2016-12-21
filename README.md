@@ -3,11 +3,11 @@ Programas dos guiões de Programação 1
 
 Índice
   
-  - Guião 1
-  - Guião 2
-  - Guião 3
-  - Guião 4
-  - Guião 5
-  - Guião 6
-  - Guião 7
-  - Guião 8
+  - Guião 1: Introdução a JAVA
+  - Guião 2: Instruções de decisão
+  - Guião 3: Ciclos
+  - Guião 4: Ciclos
+  - Guião 5: Funções
+  - Guião 6: Arrays
+  - Guião 8: Ficheiros
+  - Guião 9: Classes
