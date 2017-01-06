@@ -5,7 +5,7 @@
  */
 import java.io.*;
 import java.util.*;
-public class guiao11e3 {
+public class guiao11e1 {
 	
 	public static void main (String args[]) throws IOException {
 		
