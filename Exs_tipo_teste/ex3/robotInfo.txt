@@ -1,0 +1,8 @@
+Nome do robo: andre
+Tempo de prova: 001
+Numero de elementos da equipa: 1
+
+Nome do robo: joao
+Tempo de prova: 001
+Numero de elementos da equipa: 1
+
