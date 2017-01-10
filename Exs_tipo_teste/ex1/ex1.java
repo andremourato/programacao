@@ -66,6 +66,7 @@ public class ex1 {
 							}else System.out.println("Valores invalidos!\n");
 						}while(!isValid);
 					}else System.out.println("Ja nao e possivel adicionar mais medidas");
+					numElem++;
 					System.out.println();
 					System.out.println("-------------------------------------------");
 					System.out.println();

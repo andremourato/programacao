@@ -1,12 +1,7 @@
-Numero mecanografico: 72837
-Nota da epoca normal: 5
-Nota da epoca de recurso: 5
-Nota final da disciplina: 5
-
-Numero mecanografico: 82345
-Nota da epoca normal: 4
-Nota da epoca de recurso: 4
-Nota final da disciplina: 4
+Numero mecanografico: 84745
+Nota da epoca normal: 20
+Nota da epoca de recurso: 20
+Nota final da disciplina: 20
 
 Numero mecanografico: 82456
 Nota da epoca normal: 3
@@ -18,7 +13,12 @@ Nota da epoca normal: 2
 Nota da epoca de recurso: 2
 Nota final da disciplina: 2
 
-Numero mecanografico: 84745
+Numero mecanografico: 82345
+Nota da epoca normal: 1
+Nota da epoca de recurso: 1
+Nota final da disciplina: 1
+
+Numero mecanografico: 72837
 Nota da epoca normal: 1
 Nota da epoca de recurso: 1
 Nota final da disciplina: 1

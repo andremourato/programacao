@@ -27,7 +27,7 @@ public class ex4 {
 			
 			switch(opcao){
 				case 1:
-				
+					
 					System.out.print("Nome do ficheiro: ");
 					String fileName = read.nextLine(); //pede o nome do ficheiro
 					File file = new File(fileName);
@@ -116,27 +116,7 @@ public class ex4 {
 					break;
 					
 				case 5:
-					boolean skip = false;
-					System.out.println("Histograma de uma disciplina");
-					System.out.println();
-					for(int i=0;i<21;i++){
-						skip = false;
-						for(int j=0;!skip;j++){
-							skip = false;
-							if(j==numAlunos) skip = true;
-							if(alunos[j].nfinal==i){
-								System.out.print(" *");
-								skip = true;
-							}
-							else System.out.print("  ");
-						}
-					}
-					System.out.println();
-					System.out.println("---------------------------------------------------------------");
-					for(int i=0;i<21;i++){
-						System.out.printf(" %02d",i);
-					}
-					System.out.println();
+					drawHist(alunos, numAlunos);
 					System.out.println();
 					System.out.println("-------------------------");
 					System.out.println();
@@ -215,6 +195,27 @@ public class ex4 {
 			alunosf[i].nfinal = alunos[i].nfinal;
 		}
 		return alunos;
+	}
+	public static void drawHist(Aluno[] alunos, int numAlunos){ //desenha o histograma
+		int height = 0;
+		int[] times = new int[21];
+		for(int i=0; i<numAlunos;i++){
+			for(int j=0;j<times.length;j++){
+				if(alunos[i].nfinal==j) times[alunos[i].nfinal]++;
+			}
+		} //array times está definido
+		for(int i : times) if(i > height) height = i; //determina a altura do histograma
+		for(int n=height;n>0;n--){ //percorre o array na vertical
+			for(int m=0;m<21;m++){ //percore o array na horizontal
+				if(times[m]==n){
+					System.out.print("  *");
+					times[m]--;
+				}else System.out.print("   ");
+			}
+			System.out.println();
+		}
+		System.out.println("----------------------------------------------------------------------");
+		for(int i = 0 ; i < 21; i++) System.out.printf(" %02d",i); //imprime a linha com os valores de 0 a 20
 	}
 }
 
