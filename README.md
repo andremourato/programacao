@@ -11,3 +11,5 @@ Programas dos guiões de Programação 1
   - Guião 6: Arrays
   - Guião 8: Ficheiros
   - Guião 9: Classes
+  - Guião 10: Strings
+  - Guião 11: Pesquisa e Ordenação
