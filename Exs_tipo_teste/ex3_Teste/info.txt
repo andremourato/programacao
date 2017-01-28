@@ -1,0 +1,14 @@
+Nome do robo: andre
+
+Tempo de prova: 05:57:10
+
+Numero de elementos da equipa: 2
+
+
+Nome do robo: joao
+
+Tempo de prova: 01:00:00
+
+Numero de elementos da equipa: 2
+
+
