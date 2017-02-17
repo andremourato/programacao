@@ -14,7 +14,7 @@ public class g1e4 {
 		String newSentence="";
 		do{
 			String word = sc.next();//the program reads each word in the sentence
-			for(int i=0; i<word.length();i++){ //we search each character of the word
+			for(int i=0;i<word.length();i++){ //we search each character of the word
 				if(word.charAt(i)=='l') newSentence+="u"; //it switches the 'l' for 'u'
 				else if (word.charAt(i)=='L') newSentence+="U"; //same thing in upper case
 				else if(word.charAt(i)!='r') newSentence+=word.charAt(i); //doesn't count the 'r'

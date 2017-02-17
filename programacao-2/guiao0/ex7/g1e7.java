@@ -5,6 +5,7 @@ public class g1e7 {
 	
 	public static void main (String[] args) throws IOException{
 		//name of the files
+		System.out.println(args[1]);
 		String fileInName = "text1.txt"; //I used standard names for the files, but you just need to pass these names
 		String fileOutName = "text2.txt"; // as arguments to method main in the command line
 		File fileIn = new File(fileInName); //File from which the text is copied
