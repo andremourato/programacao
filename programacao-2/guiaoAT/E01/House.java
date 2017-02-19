@@ -39,7 +39,7 @@ public class House {
    public int addRoom(Room r) {
       if (size == rooms.length) extendHouse();
       rooms[size] = r;
-      size++;
+      size++; //increments the number of rooms. Use this value when working with the number of rooms
       return size;
    }
 
@@ -52,14 +52,13 @@ public class House {
    public void addDoor(Door d) {
 	  if(numDoors == doors.length) extendRooms();
       doors[numDoors] = d;
-      numDoors++;
+      numDoors++; //increments the number of doors. Use this value when working with the number of doors
    }
 
 	private void extendRooms(){
 		Door [] newDoors = new Door[doors.length+extensionSize];
 		arraycopy(doors, 0, newDoors, 0, doors.length);
 		doors = newDoors;
-		
 	}
 	
    public int numDoors() {
@@ -69,17 +68,38 @@ public class House {
    public int maxNumDoors() {
       return doors.length;
    }
-   
-	public int roomClosestToRoomType(String roomType){
-		for(int i=0;i<rooms.length;i++){
-			
+
+	public int roomClosestToRoomType(String roomType){ //searches for the closest room
+		double minDist = 999;
+		double dist = 0;
+		int closestIndex = 0;
+		for(int i=0;i<size;i++){
+			if(rooms[i].roomType().equals(roomType)){ //we fix the room of type roomType and search for the closest room
+				for(int j=0;j<size;j++){
+					if(!roomType.equals(rooms[j].roomType())){
+						dist = rooms[i].geomCenter().distTo(rooms[j].geomCenter()); //checks the distance between two rooms
+						if(dist<minDist){ //checks the distance to every other room
+							closestIndex = j;
+							minDist = dist;
+						}
+					}
+				}
+			}
 		}
+		return closestIndex;
 	}
-   
-	/*public int maxDoorsInAnyRoom(){
-		for(int i=0;i<rooms.length;i++){
-			
+
+	public int maxDoorsInAnyRoom(){
+		int[] numberDoors = new int[size];
+		for(int i=0;i<numDoors;i++){
+			for (int j = 0; j < size; j++){
+				if(doors[i].room1()==j) numberDoors[j]++;
+				if(doors[i].room2()==j) numberDoors[j]++;
+			}
 		}
-	}*/
+		int maxDoors = 0;
+		for(int i:numberDoors) if(i>maxDoors) maxDoors = i; //find the highest number of doors in the array
+		return maxDoors;
+	}
 }
 
