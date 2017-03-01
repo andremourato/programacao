@@ -1,5 +1,5 @@
 import static java.lang.System.*;
-import ex1.*;
+import data.*;
 
 public class p32
 {

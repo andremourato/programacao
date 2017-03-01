@@ -1,18 +1,20 @@
+package data;
+
 public class Data {
-	Data(int dia, int mes, int ano){
+	public Data(int dia, int mes, int ano){
 		this.dia = dia;
 		this.mes = mes;
 		this.ano = ano;
 	}
 	
-	boolean igualA( Data date ){
+	public boolean igualA( Data date ){
 		if(this.ano != date.ano()) return false;
 		else if(this.mes != date.mes()) return false;
 		else if(this.dia != date.dia()) return false;
 		else return true;
 	}
 	
-	boolean maiorDoQue( Data date ){
+	public boolean maiorDoQue( Data date ){
 		
 		if(this.ano < date.ano()) return false;
 		else if(this.ano > date.ano()) return true;
@@ -27,7 +29,7 @@ public class Data {
 		}
 	}
 	
-	boolean menorDoQue( Data date ){
+	public boolean menorDoQue( Data date ){
 		
 		if(this.ano < date.ano()) return true;
 		else if(this.ano > date.ano()) return false;
@@ -42,15 +44,15 @@ public class Data {
 		}
 	}
 	
-	int dia(){
+	public int dia(){
 		return dia;
 	}
 	
-	int mes(){
+	public int mes(){
 		return mes;
 	}
 	
-	int ano(){
+	public int ano(){
 		return ano;
 	}
 	
