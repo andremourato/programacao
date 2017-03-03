@@ -22,11 +22,11 @@ public class Caixa {
 	
 	}
 	
-	private void reduceArray(int numRetirar){ //reduz o array com 'numRetirar' elementos
+	private long[] reduceArray(int numRetirar){ //reduz o array com 'numRetirar' elementos
 		
 		long[] tempMoedas = new long[numMoedas];
-		System.arraycopy(moedas, numRetirar, tempMoedas, 0, numMoedas); //TODO COMPLETAR!
-		moedas = tempMoedas;
+		System.arraycopy(moedas, numRetirar, tempMoedas, 0, numMoedas);
+		return tempMoedas;
 	
 	}
 	
@@ -51,7 +51,11 @@ public class Caixa {
 		}while(moeda != 0);
 	}
 	
-	public void retirarMoedas(long valorMin){ //retira uma quantidade de moedas
+	public void updateMoedas(long valorMin){
+		moedas = retirarMoedas(valorMin);
+	}
+	
+	private long[] retirarMoedas(long valorMin){ //retira uma quantidade de moedas
 		
 		long sum = 0;
 		int numRetirar = 0;
@@ -63,8 +67,7 @@ public class Caixa {
 		}
 		numMoedas -= numRetirar;
 		mostrarMoedasARetirar(numRetirar);
-		reduceArray(numRetirar);
-		
+		return reduceArray(numRetirar);
 	}
 	
 	public long total(){

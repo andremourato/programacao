@@ -26,7 +26,7 @@ public class p35 {
 				case 2:
 					//Retira moedas
 					out.print("Valor minimo a retirar: ");
-					caixa.retirarMoedas(read.nextLong());
+					caixa.updateMoedas(read.nextLong());
 					printInfo();
 				break;
 					
