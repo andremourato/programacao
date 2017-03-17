@@ -1,0 +1,4 @@
+texto random que e utilizado
+para testar o programa java
+e verificar se este realmente funciona como
+pretendido
