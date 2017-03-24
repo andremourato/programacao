@@ -31,10 +31,19 @@ public class p66 {
 		/* Método iterativo*/
 		for(int n = 1; n <= N;n++)
 			div = div * juro - P;
+		if(div < 0){
+			out.print("\nImpossivel pagar a divida\n");
+			exit(1);
+		}
 		out.printf("(iterativo) d(%d) = %.10f \n", N, div);
 		
 		/*Método recursivo*/
-		out.printf("(recursivo) d(%d) = %.10f\n", N, getDiv(M, N));
+		div = getDiv(M, N);
+		if(div < 0){
+			out.print("\nImpossivel pagar a divida\n");
+			exit(1);
+		}
+		out.printf("(recursivo) d(%d) = %.10f\n", N, div);
 	}
 	
 	static float getDiv(int M, int n){
