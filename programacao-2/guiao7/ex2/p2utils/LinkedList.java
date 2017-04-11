@@ -79,6 +79,18 @@ public class LinkedList<E> {
     if (isEmpty())
       last = null;
   }
+  /*Removes a specific element*/
+  public void remove(E e){
+		remove(e, first);
+  }
+
+	private void remove(E e, Node<E> n){
+		if(n != null && n.next != null){ //to prevent 'NullPointerException'
+			if(n.elem == e) first = n.next; //in case the wanted element is the first one
+			if(n.next.elem == e) n.next = n.next.next; //removes n.next if it's the wanted element
+			remove(e, n.next);
+		}
+	}
 
   /**
    * Removes all elements
@@ -93,6 +105,7 @@ public class LinkedList<E> {
   public void print() {
     print(first);
   }
+  
   private void print(Node<E> n) {
     if (n != null) {
       System.out.println(n.elem);
@@ -108,28 +121,16 @@ public class LinkedList<E> {
   public boolean contains(E e) { 
     return contains(first,e); 
   }
+  
   private boolean contains(Node<E> n,E e) {
     if (n == null) return false;
     if (n.elem==null) return e==null; //dispensável, se impedirmos elem==null
-    if (n.elem.equals(e)) return true; 
+    if (n.elem.equals(e)) return true;
     return contains(n.next,e);
   }
 
   public LinkedList<E> clone(){ 
 		return clone(first);
-  }
-  
-  public LinkedList<E> reverse(){ 
-		return clone(last);
-  }
-  
-  public E get(int pos){
-	  return get(pos, first);
-  }
-  
-  private E get(int pos, Node<E> n){
-	  if (pos == 0) return n.elem;
-	  return get(pos - 1, first);
   }
   
   private LinkedList<E> clone(Node<E> n){
@@ -139,14 +140,34 @@ public class LinkedList<E> {
 		return cln;
   }
   
-  public LinkedList<E> concatenate(LinkedList<E> lst){
-		return concatenate(lst.first, lst);
+  public LinkedList<E> reverse(){ //ERROR In this method. NOT WORKING
+		return reverse(first);
   }
   
-  private LinkedList<E> concatenate(Node<E> n, LinkedList<E> lst){
-		addLast(lst.n);
-		return n.next;
-		
+  private LinkedList<E> reverse(Node<E> n){
+		if(n == null) return new LinkedList<E>();
+		LinkedList<E> rev = reverse(n.next);
+		rev.addLast(n.elem);
+		return rev;
+  }
+  
+  public E get(int pos){
+		return get(pos, first);
+  }
+  
+  private E get(int pos, Node<E> n){
+	  if (pos == 0) return n.elem;
+	  return get(pos - 1, n.next);
+  }
+  
+  public LinkedList<E> concatenate(LinkedList<E> lst){
+		return concatenate(lst.first, clone());
+  }
+  
+  private LinkedList<E> concatenate(Node<E> n, LinkedList<E> conc){
+		if(n == null) return conc;
+		else conc.addLast(n.elem);
+		return concatenate(n.next, conc);
    }
   
 }
