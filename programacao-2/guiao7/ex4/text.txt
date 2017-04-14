@@ -1,0 +1,15 @@
+primeira
+segunda
+terceira
+quarta
+este ficheiro de texto serve
+para testar a integridade do jar
+fornecido pelo professor
+e necessario escrever uma frase com mais de 20 caracteres
+e necessario escrever uma frase com mais de 20 caracteres
+123456789123456789123456789
+sapo
+frase um bocado maior
+r mas nao muito
+teste
+frase com talvez um pouco mais de 20 carateres
