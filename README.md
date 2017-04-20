@@ -1,8 +1,9 @@
-# programacao-1
-Programas dos guiões de Programação 1
+# programacao
+Exercícios dos guiões de Programação
 
 Índice
-  
+
+Programação 1
   - Guião 1: Introdução a JAVA
   - Guião 2: Instruções de decisão
   - Guião 3: Ciclos
@@ -13,3 +14,13 @@ Programas dos guiões de Programação 1
   - Guião 9: Classes
   - Guião 10: Strings
   - Guião 11: Pesquisa e Ordenação
+  
+Programação 2
+  - Guião 1: Revisões de Programação 1
+  - Guião 2: Classes, Objetos e Pacotes
+  - Guião 3: Programação Modular
+  - Guião 4: TDA e Programação por Contrato
+  - Guião 5: Robustez
+  - Guião 6: Recursividade
+  - Guião 7: Listas Ligadas (LinkedLists)
+  - Guião 8: Recursão vs Iteração
