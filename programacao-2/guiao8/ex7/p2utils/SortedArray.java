@@ -68,6 +68,7 @@ public class SortedArray<E extends Comparable<E>> {
 		
 		boolean found = false;
 		for(int i = 0; i < size; i++){
+			if(e.compareTo(array[i]) < 0) break;
 			if(e.compareTo(array[i]) == 0){
 				found = true;
 				break;
