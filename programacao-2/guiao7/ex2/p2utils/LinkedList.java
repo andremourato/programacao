@@ -1,6 +1,6 @@
 package p2utils;
 
-public class LinkedList<E> {
+public class LinkedList<E extends Comparable<E>> {
 
   private Node<E> first = null;
   private Node<E> last = null;
@@ -79,18 +79,6 @@ public class LinkedList<E> {
     if (isEmpty())
       last = null;
   }
-  /*Removes a specific element*/
-  public void remove(E e){
-		remove(e, first);
-  }
-
-	private void remove(E e, Node<E> n){
-		if(n != null && n.next != null){ //to prevent 'NullPointerException'
-			if(n.elem == e) first = n.next; //in case the wanted element is the first one
-			if(n.next.elem == e) n.next = n.next.next; //removes n.next if it's the wanted element
-			remove(e, n.next);
-		}
-	}
 
   /**
    * Removes all elements
@@ -105,13 +93,69 @@ public class LinkedList<E> {
   public void print() {
     print(first);
   }
-  
   private void print(Node<E> n) {
     if (n != null) {
       System.out.println(n.elem);
       print(n.next);
     }
   }
+  
+  /***************************************/
+  
+	public LinkedList<E> clone(){
+		return clone(first);
+	}
+	
+	private LinkedList<E> clone(Node<E> n){
+		if(n == null) return new LinkedList<E>();
+		LinkedList<E> lst = clone(n.next);
+		lst.addFirst(n.elem);
+		return lst;
+	}
+  
+	//Same as clone() but it uses addLast
+	public LinkedList<E> reverse(){
+			return reverse(first);
+	}
+  
+	private LinkedList<E> reverse(Node<E> n){
+		if(n == null) return new LinkedList<E>();
+		LinkedList<E> lst = reverse(n.next);
+		lst.addLast(n.elem);
+		return lst;
+	}
+	
+	public E get(int pos){
+		assert 0 <= pos && pos < size();
+		return get(pos, first);
+	}
+	
+	private E get(int pos, Node<E> n){
+		if(pos == 0) return n.elem;
+		return get(pos - 1, n.next);
+	}
+	
+	public LinkedList<E> concatenate(LinkedList<E> lst){
+		return concatenate(clone(), lst.first);
+	}
+	
+	private LinkedList<E> concatenate(LinkedList<E> conc, Node<E> n){
+		if(n == null) return conc;
+		conc.addLast(n.elem);
+		return concatenate(conc, n.next);
+	}
+	
+	public void remove(E e){
+		remove(e, first);
+	}
+  
+	private void remove(E e, Node<E> n){
+		if(e.compareTo(n.elem) == 0) first = n.next;
+		if(e.compareTo(n.next.elem) == 0) n.next = n.next.next;
+		else remove(e, n.next);
+	}
+  
+  /***************************************/
 
   /**
    * Checks if the given element exists in the list
@@ -121,53 +165,14 @@ public class LinkedList<E> {
   public boolean contains(E e) { 
     return contains(first,e); 
   }
-  
   private boolean contains(Node<E> n,E e) {
     if (n == null) return false;
     if (n.elem==null) return e==null; //dispensável, se impedirmos elem==null
-    if (n.elem.equals(e)) return true;
+    if (n.elem.equals(e)) return true; 
     return contains(n.next,e);
   }
 
-  public LinkedList<E> clone(){ 
-		return clone(first);
-  }
+  // funções adicionais pedidas no guião...
   
-  private LinkedList<E> clone(Node<E> n){
-		if(n == null) return new LinkedList<E>();
-		LinkedList<E> cln = clone(n.next);
-		cln.addFirst(n.elem);
-		return cln;
-  }
-  
-  public LinkedList<E> reverse(){ //ERROR In this method. NOT WORKING
-		return reverse(first);
-  }
-  
-  private LinkedList<E> reverse(Node<E> n){
-		if(n == null) return new LinkedList<E>();
-		LinkedList<E> rev = reverse(n.next);
-		rev.addLast(n.elem);
-		return rev;
-  }
-  
-  public E get(int pos){
-		return get(pos, first);
-  }
-  
-  private E get(int pos, Node<E> n){
-	  if (pos == 0) return n.elem;
-	  return get(pos - 1, n.next);
-  }
-  
-  public LinkedList<E> concatenate(LinkedList<E> lst){
-		return concatenate(lst.first, clone());
-  }
-  
-  private LinkedList<E> concatenate(Node<E> n, LinkedList<E> conc){
-		if(n == null) return conc;
-		else conc.addLast(n.elem);
-		return concatenate(n.next, conc);
-   }
-  
+
 }
