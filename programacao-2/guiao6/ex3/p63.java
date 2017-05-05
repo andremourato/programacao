@@ -10,8 +10,7 @@ public class p63 {
   public static void printArray(String[] array, int N) {
 		
 		if(N > 0){
-			String str = array[N-1];
-			out.println(str);
+			out.println(array[N-1]);
 			printArray(array, N-1);
 		}
   }
