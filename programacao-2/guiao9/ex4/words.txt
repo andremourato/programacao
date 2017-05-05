@@ -1,0 +1,3 @@
+this program 5   . should only extract words but not '!
+punctuation
+it cannot repeat words nor this

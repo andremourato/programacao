@@ -1,0 +1,2 @@
+random text with some words
+to test the program
