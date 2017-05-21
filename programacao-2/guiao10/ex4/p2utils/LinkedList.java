@@ -163,7 +163,7 @@ public class LinkedList<E> {
    * @return {@code true} if the element exists and {@code false} otherwise
    */
   public boolean contains(E e) { 
-    return contains(first,e); 
+    return contains(first,e);
   }
   private boolean contains(Node<E> n,E e) {
     if (n == null) return false;
@@ -172,7 +172,16 @@ public class LinkedList<E> {
     return contains(n.next,e);
   }
 
-  // funções adicionais pedidas no guião...
+  public String inString(){
+	 if(isEmpty()) return "[]";
+	 return "[" + inString(first) + "]";
+  }
+  
+  private String inString(Node<E> n){
+	 if(n.next == null) return String.valueOf(n.elem);
+	 return String.valueOf(n.elem) + ", " + inString(n.next);
+	 
+  }
   
 
 }

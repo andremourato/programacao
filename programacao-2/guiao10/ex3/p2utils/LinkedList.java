@@ -172,7 +172,16 @@ public class LinkedList<E> {
     return contains(n.next,e);
   }
 
-  // funções adicionais pedidas no guião...
+  public String toString(){
+	 if(isEmpty()) return "[]";
+	 return "[" + toString(reverse().first) + "]";
+  }
+  
+  private String toString(Node<E> n){
+	 if(n.next == null) return String.valueOf(n.elem);
+	 return String.valueOf(n.elem) + ", " + toString(n.next);
+	 
+  }
   
 
 }
