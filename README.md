@@ -24,3 +24,8 @@ Programação 2
   - Guião 6: Recursividade
   - Guião 7: Listas Ligadas (LinkedLists)
   - Guião 8: Recursão vs Iteração
+  - Guião 9: Ordenação e Complexidade Algorítmica
+  - Guião 10: Pilhas, Filas e Listas Bi-ligadas
+  - Guião 11: Listas de pares Chave-Valor
+  - Guião 12: Tabelas de dispersão (Hashtables)
+  - Guião 13: Árvores Binárias (Binary Search Trees)
