@@ -29,4 +29,4 @@ Programação 2
   - Guião 11: Listas de pares Chave-Valor
   - Guião 12: Tabelas de dispersão (Hashtables)
   - Guião 13: Árvores Binárias (Binary Search Trees)
-  - Guião TA: Guião de Trabalho Autónomo. Exercícios complementares
+  - Guião TA: Guião de Trabalho Autónomo. Exercícios complementares
