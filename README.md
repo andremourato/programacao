@@ -30,3 +30,6 @@ Programação 2
   - Guião 12: Tabelas de dispersão (Hashtables)
   - Guião 13: Árvores Binárias (Binary Search Trees)
   - Guião TA: Guião de Trabalho Autónomo. Exercícios complementares
+
+Programação 3
+  - Guião 1: Encapsulamento, Visibilidade e Overloading 
