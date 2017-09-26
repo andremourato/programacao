@@ -32,4 +32,5 @@ Programação 2
   - Guião TA: Guião de Trabalho Autónomo. Exercícios complementares
 
 Programação 3
-  - Guião 1: Encapsulamento, Visibilidade e Overloading 
+  - Guião 1: Encapsulamento, Visibilidade e Overloading
+  - Paradigma Object Oriented, Encapsulamento e revisão dos conceitos this e static
