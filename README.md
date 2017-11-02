@@ -33,4 +33,9 @@ Programação 2
 
 Programação 3
   - Guião 1: Encapsulamento, Visibilidade e Overloading
-  - Paradigma Object Oriented, Encapsulamento e revisão dos conceitos this e static
+  - Guião 2: Paradigma Object Oriented, Encapsulamento e revisão dos conceitos this e static
+  - Guião 3: Herança Simples e Overriding de métodos
+  - Guião 4: Herança e Polimorfismo
+  - Guião 5: Classes abstratas e Interfaces
+  - Guião 6: Expressões Lambda
+  - Guião 7: I/0, Serialização e JAR files
