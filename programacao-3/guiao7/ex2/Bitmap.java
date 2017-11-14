@@ -1,15 +1,19 @@
 package aula7.ex2;
-import java.io.IOException;
+import java.io.File;
 import java.io.RandomAccessFile;
 
-public class Bitmap{
-	BitmapFileHeader bitmapFileHeader;
-	BitmapInfoHeader bitmapInfoHeader;
+public class Bitmap implements Cloneable{
+	private BitmapFileHeader bitmapFileHeader;
+	private BitmapInfoHeader bitmapInfoHeader;
 	private String name;
-	byte[] rgbQuad; // color pallete – opcional (ver abaixo)
-	byte[] data; // pixel data
-	Pixel[][] pixels;
+	private byte[] rgbQuad; // color pallete – opcional (ver abaixo)
+	private byte[] data; // pixel data
+	private Pixel[][] pixels;
 	
+	public Bitmap(File file) {
+		this(file.getAbsolutePath());
+	}
+
 	public Bitmap(String path) {
 		try{
 			RandomAccessFile file = new RandomAccessFile(path,"r");
@@ -52,16 +56,7 @@ public class Bitmap{
 			file.close();
 			
 			/*CREATED A 2D ARRAY FOR THE PIXELS*/
-			pixels = new Pixel[Math.abs(bitmapInfoHeader.height)][Math.abs(bitmapInfoHeader.width)];
-			int i = 0;
-			for(int y = 0; y < pixels.length; y++) {
-				for(int x = 0; x < pixels[0].length; x++) {
-					pixels[y][x] = new Pixel(data[i++],data[i++],data[i++]);
-				}
-			}
-			
-			//Flips the image since the pixelData is stores upside down
-			pixels = flipHorizontal(pixels);
+			pixels = byteToPixelArray(data, Math.abs(bitmapInfoHeader.height), Math.abs(bitmapInfoHeader.width));
 			
 		} catch (Exception e) {
 			System.out.println("ERROR: Cannot read from file");
@@ -70,35 +65,43 @@ public class Bitmap{
 		
 	}
 	
-	public void saveAsCopy() { //Used to test if data is being read correctly
-		write(pixelToByteArray(pixels),name+"_copy.bmp",bitmapInfoHeader.height,bitmapInfoHeader.width,bitmapFileHeader.size);
+	public void saveAsCopy(String newName) { //Used to test if data is being read correctly
+		write(pixelToByteArray(pixels),newName+".bmp",bitmapInfoHeader.height,bitmapInfoHeader.width,bitmapFileHeader.size);
 	}
 	
-	public void saveAsRawType() {
-		write(pixelToByteArray(pixels),name+".raw",bitmapInfoHeader.height,bitmapInfoHeader.width,bitmapFileHeader.size-bitmapFileHeader.offBits);		
+	public void saveAsRawType(String newName) {
+		write(pixelToByteArray(pixels),newName+".raw",bitmapInfoHeader.height,bitmapInfoHeader.width,bitmapFileHeader.size-bitmapFileHeader.offBits);		
 	}	
 	
 	//Resizes a copy of the image and saves it
 	//Preserves the original BMP image
-	public void resize() {
+	public void saveResize(String newName) {
         
 		int width = Math.abs(bitmapInfoHeader.width);
 		int height = Math.abs(bitmapInfoHeader.height);
         int newWidth = (int) width/2; 
         int newHeight = (int) height/2;
-        write(pixelToByteArray(flipHorizontal(scaleDown(pixels,newHeight,newWidth))),name+"_resized.bmp",newHeight,newWidth,bitmapFileHeader.size/4);
+        write(pixelToByteArray(scaleDown(pixels)),newName+".bmp",newHeight,newWidth,bitmapFileHeader.size/4);
+	}
+	
+	public static Bitmap resize(Bitmap bmp) {
+		bmp.pixels = scaleDown(bmp.pixels);
+		bmp.bitmapInfoHeader.width = bmp.bitmapInfoHeader.width/2;
+		bmp.bitmapInfoHeader.height = bmp.bitmapInfoHeader.height/2;
+		bmp.data = Bitmap.pixelToByteArray(bmp.pixels);
+		return bmp;
 	}
 	
 	//Simple algorithm that produces a good quality image
 	//This algorithm skips every 2 pixels in order to make the whole image 1/4 smaller
-	public Pixel[][] scaleDown(Pixel[][] pixelData,int height, int width){
-		Pixel[][] newPixelData = new Pixel[height][width];
+	private static Pixel[][] scaleDown(Pixel[][] pixelData){
+		Pixel[][] newPixelData = new Pixel[pixelData.length/2][pixelData[0].length/2];
 		
 		int pixelsX = 0;
         int pixelsY = 0;
         
-		for(int y = 0; y < height; y++) {
-			for(int x = 0; x < width; x++) {
+		for(int y = 0; y < pixelData.length/2; y++) {
+			for(int x = 0; x < pixelData[0].length/2; x++) {
 				newPixelData[y][x] = pixelData[pixelsY][pixelsX];
 				pixelsX += 2;
 			}
@@ -108,11 +111,25 @@ public class Bitmap{
 		return newPixelData;
 	}
 	
-	public void flipHorizontal() {
-		write(pixelToByteArray(flipHorizontal(pixels)),name+"_Hflip.bmp",bitmapInfoHeader.height,bitmapInfoHeader.width,bitmapFileHeader.size);
+	public void saveFlipHorizontal(String newName) {
+		write(pixelToByteArray(flipHorizontal(pixels)),newName+".bmp",bitmapInfoHeader.height,bitmapInfoHeader.width,bitmapFileHeader.size);
 	}
 	
-	public Pixel[][] flipHorizontal(Pixel[][] pixelData){
+	public static Bitmap flipHorizontal(File file) {
+		return flipHorizontal(new Bitmap(file));
+	}
+	
+	public static byte[] flipHorizontal(byte[] byteArray, int height, int width) {
+		return pixelToByteArray(flipHorizontal(byteToPixelArray(byteArray,height,width)));
+	}
+	
+	public static Bitmap flipHorizontal(Bitmap bmp) {
+		bmp.pixels = flipHorizontal(bmp.pixels);
+		bmp.data = Bitmap.pixelToByteArray(bmp.pixels);
+		return bmp;
+	}
+	
+	private static Pixel[][] flipHorizontal(Pixel[][] pixelData){
 		Pixel[][] newPixelData = new Pixel[pixelData.length][pixelData[0].length];
 		for(int y = 0; y < pixelData.length; y++) {
 			for(int x = 0; x < pixelData[0].length; x++) {
@@ -123,11 +140,17 @@ public class Bitmap{
 		return newPixelData;
 	}
 	
-	public void flipVertical() {
-		write(pixelToByteArray(flipVertical(pixels)),name+"_Vflip.bmp",bitmapInfoHeader.height,bitmapInfoHeader.width,bitmapFileHeader.size);
+	public void saveFlipVertical(String newName) {
+		write(pixelToByteArray(flipVertical(pixels)),newName+".bmp",bitmapInfoHeader.height,bitmapInfoHeader.width,bitmapFileHeader.size);
 	}
 	
-	public Pixel[][] flipVertical(Pixel[][] pixelData){
+	public static Bitmap flipVertical(Bitmap bmp) {
+		bmp.pixels = flipHorizontal(flipVertical(flipHorizontal(bmp.pixels)));
+		bmp.data = Bitmap.pixelToByteArray(bmp.pixels);
+		return bmp;
+	}
+	
+	private static Pixel[][] flipVertical(Pixel[][] pixelData){
 		Pixel[][] newPixelData = new Pixel[pixelData.length][pixelData[0].length];
 		
 		for(int y = 0; y < pixelData.length; y++) {
@@ -139,7 +162,7 @@ public class Bitmap{
 		return newPixelData;
 	}
 	
-	public static byte[] pixelToByteArray(Pixel[][] pixelArray) {
+	private static byte[] pixelToByteArray(Pixel[][] pixelArray) {
 		byte[] retVal = new byte[pixelArray.length * pixelArray[0].length * 3];
 		//pixelArray.length => height
 		//pixelArray[0].length => width
@@ -156,25 +179,29 @@ public class Bitmap{
 	}
 	
 	public void write(byte[] byteArray, String newFileName, int height, int width, int size) {
+		write(this,byteArray,newFileName,height,width,size);
+	}
+	
+	public static void write(Bitmap bmp, byte[] byteArray, String newFileName, int height, int width, int size) {
 		try {
 			RandomAccessFile newFile = new RandomAccessFile(newFileName, "rw");
-	        newFile.writeShort(Short.reverseBytes(bitmapFileHeader.type));
+	        newFile.writeShort(Short.reverseBytes(bmp.bitmapFileHeader.type));
 	        newFile.writeInt(Integer.reverseBytes(size));
-	        newFile.writeShort(Short.reverseBytes(bitmapFileHeader.reserved1));
-	        newFile.writeShort(Short.reverseBytes(bitmapFileHeader.reserved2));
-	        newFile.writeInt(Integer.reverseBytes(bitmapFileHeader.offBits));
+	        newFile.writeShort(Short.reverseBytes(bmp.bitmapFileHeader.reserved1));
+	        newFile.writeShort(Short.reverseBytes(bmp.bitmapFileHeader.reserved2));
+	        newFile.writeInt(Integer.reverseBytes(bmp.bitmapFileHeader.offBits));
 	        
-	        newFile.writeInt(Integer.reverseBytes(bitmapInfoHeader.size));
+	        newFile.writeInt(Integer.reverseBytes(bmp.bitmapInfoHeader.size));
 	        newFile.writeInt(Integer.reverseBytes(width));
-	        newFile.writeInt(Integer.reverseBytes(-height)); //because the pixel data is stored upside down
-	        newFile.writeShort(Short.reverseBytes(bitmapInfoHeader.planes));
-	        newFile.writeShort(Short.reverseBytes(bitmapInfoHeader.bitCount));
-	        newFile.writeInt(Integer.reverseBytes(bitmapInfoHeader.compression));
-	        newFile.writeInt(Integer.reverseBytes(bitmapInfoHeader.sizeImage));
-	        newFile.writeInt(Integer.reverseBytes(bitmapInfoHeader.xPelsPerMeter));
-	        newFile.writeInt(Integer.reverseBytes(bitmapInfoHeader.yPelsPerMeter));
-	        newFile.writeInt(Integer.reverseBytes(bitmapInfoHeader.clrUsed));
-	        newFile.writeInt(Integer.reverseBytes(bitmapInfoHeader.clrImportant));
+	        newFile.writeInt(Integer.reverseBytes(-Math.abs(height))); //because the pixel data is stored upside down
+	        newFile.writeShort(Short.reverseBytes(bmp.bitmapInfoHeader.planes));
+	        newFile.writeShort(Short.reverseBytes(bmp.bitmapInfoHeader.bitCount));
+	        newFile.writeInt(Integer.reverseBytes(bmp.bitmapInfoHeader.compression));
+	        newFile.writeInt(Integer.reverseBytes(bmp.bitmapInfoHeader.sizeImage));
+	        newFile.writeInt(Integer.reverseBytes(bmp.bitmapInfoHeader.xPelsPerMeter));
+	        newFile.writeInt(Integer.reverseBytes(bmp.bitmapInfoHeader.yPelsPerMeter));
+	        newFile.writeInt(Integer.reverseBytes(bmp.bitmapInfoHeader.clrUsed));
+	        newFile.writeInt(Integer.reverseBytes(bmp.bitmapInfoHeader.clrImportant));
         
         	newFile.write(byteArray);
             newFile.close();
@@ -184,7 +211,38 @@ public class Bitmap{
         }
 		
 	}
+	
+	private static Pixel[][] byteToPixelArray(byte[] data, int height, int width) {
+		Pixel[][] newPixels = new Pixel[height][width];
+		int i = 0;
+		for(int y = 0; y < newPixels.length; y++) {
+			for(int x = 0; x < newPixels[0].length; x++) {
+				newPixels[y][x] = new Pixel(data[i++],data[i++],data[i++]);
+			}
+		}
+		return newPixels;
+	}
 
+	public int width() {
+		return Math.abs(bitmapInfoHeader.width);
+	}
+	
+	public int height() {
+		return Math.abs(bitmapInfoHeader.height);
+	}
+	
+	public byte[] data() {
+		return data;
+	}
+	
+	public int offBits() {
+		return bitmapFileHeader.offBits;
+	}
+	
+	public String name() {
+		return name;
+	}
+	
 	@Override
 	public String toString() {
 		return String.format("** Information about file '%s' **\n\n"
@@ -205,7 +263,6 @@ class BitmapFileHeader{
 	// beginning of the file to the bitmap data
 	
 	public BitmapFileHeader(short type, int size, short reserved1, short reserved2, int offBits) {
-		super();
 		this.type = type;
 		this.size = size;
 		this.reserved1 = reserved1;
@@ -242,7 +299,6 @@ class BitmapInfoHeader{
 	
 	public BitmapInfoHeader(int size, int width, int height, short planes, short bitCount, int compression,
 			int sizeImage, int xPelsPerMeter, int yPelsPerMeter, int clrUsed, int clrImportant) {
-		super();
 		this.size = size;
 		this.width = width;
 		this.height = height;

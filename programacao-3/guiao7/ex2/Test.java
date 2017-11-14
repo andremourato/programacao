@@ -9,19 +9,19 @@ public class Test {
 		System.out.println(image);
 		
 		//copies the image
-		image.saveAsCopy();
+		image.saveAsCopy("Figura_copy");
 		
 		//saves the image as raw
-		image.saveAsRawType();
+		image.saveAsRawType("Figura");
 		
 		// resizes the image to 1/4 of the original image's size and saves as a bmp file
-		image.resize();
+		image.saveResize("Figura_resized");
 		
 		// flips the image horizontally
-		image.flipHorizontal();
+		image.saveFlipHorizontal("Figura_Hflip");
 		
 		// flips the image vertically
-		image.flipVertical();
+		image.saveFlipVertical("Figura_Vflip");
 		
 	}
 }
