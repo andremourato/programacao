@@ -1,19 +1,20 @@
 package aula9.ex3;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.NoSuchElementException;
 
-public class VectorPessoas {
+public class VectorPessoasBFIterator {
 	
 	private Pessoa[] pessoas;
 	private int size = 0;
 	private VectorIterator iterator;
 	
-	public VectorPessoas(int initialSize) {
+	public VectorPessoasBFIterator(int initialSize) {
 		pessoas = new Pessoa[initialSize];
 		iterator = new VectorIterator();
 	}
 	
-	public VectorPessoas() {
+	public VectorPessoasBFIterator() {
 		this(5);
 	}
 	
@@ -34,17 +35,17 @@ public class VectorPessoas {
 		}
 	}
 	
+	public BFIterator iterator() {
+		return iterator;
+	}
+	
 	public int totalPessoas() {
 		return size;
 	}
 	
-	public Iterator iterator() {
-		return iterator;
-	}
-	
-	private class VectorIterator implements Iterator{
+	private class VectorIterator implements BFIterator{
 		
-		int pointer = 0;
+		private int pointer = 0;
 		
 		@Override
 		public boolean hasNext() {
@@ -60,6 +61,21 @@ public class VectorPessoas {
 			pointer = i + 1;
 			return (Pessoa) pessoas[i];
 		}
+
+		@Override
+		public boolean hasPrevious() {
+			return pointer >= 0;
+		}
+
+		@Override
+		public Object previous() {
+			int i = pointer;
+			if (i < 0)
+				throw new NoSuchElementException();
+			pointer = i - 1;
+			return (Pessoa) pessoas[i];
+		}
 		
 	}
+	
 }

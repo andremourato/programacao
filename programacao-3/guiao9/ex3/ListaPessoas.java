@@ -13,7 +13,7 @@ public class ListaPessoas {
 		return pessoas.remove(p);
 	}
 	
-	public int totalPessoas() {
+	public int size() {
 		return pessoas.size();
 	}
 	
