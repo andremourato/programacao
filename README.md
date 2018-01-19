@@ -41,3 +41,7 @@ Programação 3
   - Guião 7: I/0
   - Guião 8: Java Swing e JAR files
   - Guião 9: Decoradores e Iteradores
+  - Guião 10: Tipos de dados genéricos
+  - Guião 11: Java Collections e Stream API
+  - Guião 12: Java Reflection
+  - Guião 13: Resolução de problemas gerais de programação
